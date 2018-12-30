@@ -1,1 +1,1 @@
-{"compileBitcode":true,"method":"app-store","SigningStyle":"manual","provisiongProfile":{"com.citi.mobile.dyadicsec.SignWithProxy":"Distribution-SignProxy"}}
+{"compileBitcode":false,"method":"ad-hoc","SigningStyle":"manual","provisiongProfile":{"com.citi.mobile.dyadicsec.SignWithProxy":"Distribution-SignProxy"}}
