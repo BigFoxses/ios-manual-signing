@@ -47,4 +47,5 @@ else
 	xcodebuild -exportArchive -archivePath "${BUILD_FILE_NAME}.xcarchive" -exportPath "${BUILD_FILE_NAME}.ipa"  -exportOptionsPlist $PWD:ExportOptionList.plist
   else
     echo "fail to generate ExportOptionList.plist" 
+  fi
 fi

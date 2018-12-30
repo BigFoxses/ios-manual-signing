@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 function Usage()
 {
-  echo "  ios-ipa-export-from-xarchive <ProjectName> <CodeSigner> <optionlist>  eg.  ios-ipa-export-from-xarchive XARCHIVEFILE iPhone Distribution:xxxxx OPTIONPLISTFILE "
+  echo "  ios-ipa-export-from-xarchive <ProjectName> <CodeSigner> <optionlist>  eg.  ios-ipa-export-from-xarchive XARCHIVEFILE iPhone Distribution:xxxxx OPTIONPLISTFILE-JSON "
 }
 
 if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]  ;then
@@ -37,4 +37,14 @@ OPTIONLIST=$3
 # Export archive (code sign using profile and code sign identity)
 # Legacy but still working (Warning: xcodebuild: WARNING: -exportArchive without -exportOptionsPlist is deprecated)
 #xcodebuild -exportArchive -archivePath "${BUILD_FILE_NAME}.xcarchive" -exportPath "${BUILD_FILE_NAME}.ipa" -exportFormat ipa -exportProvisioningProfile "${PROFILE_NAME}"
-xcodebuild -exportArchive -archivePath "${BUILD_FILE_NAME}.xcarchive" -exportPath "${BUILD_FILE_NAME}.ipa"  -exportOptionsPlist "${OPTIONLIST}"
+if [ -z $OPTIONLIST ] ; then
+    echo "$OPTIONLIST must not be empty"
+    echo "examples: ..."
+    exit 1
+else
+  cat $OPTIONLIST | plutil convert xml1 -o $PWD:ExportOptionList.plist - 
+  if [ $? -eq 0 ]; then 
+	xcodebuild -exportArchive -archivePath "${BUILD_FILE_NAME}.xcarchive" -exportPath "${BUILD_FILE_NAME}.ipa"  -exportOptionsPlist $PWD:ExportOptionList.plist
+  else
+    echo "fail to generate ExportOptionList.plist" 
+fi
