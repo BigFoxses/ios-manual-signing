@@ -52,6 +52,8 @@ if [ "$MOBILE_PROVISION_FILE" == "" ] || ! [ -f $MOBILE_PROVISION_FILE ] ; then
     usage
 fi 
 unzip -o -q $IPA_FILE -d $TMP_DIR
+IPA_EXECUTABLE=$(find $TMP_DIR -name "*.app" -type d | cut -d "/" -f 3 | cut -d "." -f 1)
+echo "iOS executale Name : $IPA_EXECUTABLE"
 cp $MOBILE_PROVISION_FILE ${TMP_DIR}/Payload/${IPA_EXECUTABLE}.app/$DEF_MOBILE_PROVISION_FILE
 
 ## get the code signer -development or distribution
@@ -64,6 +66,6 @@ for i in $(find ${TMP_DIR} -type d  -name "*.framework") ; do
 done
 codesign -f -v --entitlements $PWD/entilements.xml -s $CODE_SIGNER_HASH ${TMP_DIR}/Payload/${IPA_EXECUTABLE}.app
 # zip package
-(cd $TMP_DIR; zip -qr ../${IPA_EXECUTABLE}.ipa.resign .) 
-echo "Resign completed. The resigned package is ${IPA_EXECUTABLE}.ipa.resign "
+(cd $TMP_DIR; zip -qr ../${IPA_FILE}.resign .) 
+echo "Resign completed. The resigned package is ${IPA_FILE}.resign "
 rm -rf $TMP_DIR

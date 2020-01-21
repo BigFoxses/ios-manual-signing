@@ -40,10 +40,12 @@ if  [ "$IPA_FILE" == "" ] || ! [ -f $IPA_FILE ] ; then
 fi
 
 IPA_EXECUTABLE=$(echo $IPA_FILE | cut -d "." -f 1) 
-echo $IPA_EXECUTABLE
+#echo $IPA_EXECUTABLE
 unzip -q -o $IPA_FILE -d $TMP_DIR
 CURRENT_DIR=$PWD
 echo "$CURRENT_DIR"
+IPA_EXECUTABLE=$(find $TMP_DIR -name "*.app" -type d | cut -d "/" -f 3 | cut -d "." -f 1)
+echo "iOS executale Name : $IPA_EXECUTABLE"
 if [  "$ENTILEMENT_FILE" != "" ]; then 
     find $TMP_DIR -name ${IPA_EXECUTABLE} -exec jtool --ent '{}' \; > $PWD/entilements.xml 
 fi 
