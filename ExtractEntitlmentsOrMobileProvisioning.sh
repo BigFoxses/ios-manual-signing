@@ -12,7 +12,7 @@ IPA_FILE=
 ARG=0
 usage() {
 
-    echo "Resign.sh -p|--provision -e|--ent  -i |--ipa <ipa file to be extracted from "
+    echo "ExtractEntitlmentsOrMobileProvisioning -p|--provision -e|--ent  -i |--ipa <ipa file to be extracted from "
     exit 1
 }
 while [ "$1" != "" ]; do
