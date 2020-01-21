@@ -36,7 +36,6 @@ while [ "$1" != "" ]; do
 done
 
 if  [ "$IPA_FILE" == "" ] || ! [ -f $IPA_FILE ] ; then 
-    echo "$IPA_FILE does not exit"
     usage
 fi
 
