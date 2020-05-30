@@ -4,7 +4,7 @@
 # assume entitlement file could be extracted from binary file . would abort if this is not the case.
 # assume  mobileprovsioning file exist , if not abort
 BOOTED_UDID=$(xcrun simctl list |  grep -i boot | head -n 1|  sed "s/(/|/g" | sed "s@)@|@g" | cut -d'|' -f4)
-if [ "BOOTED_UUID" == "" ]; then
+if [ "$BOOTED_UDID" == "" ]; then
     echo "NO BOOTED DEVICE FOUND"
     exit
 fi
