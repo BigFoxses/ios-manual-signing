@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "ios-ipa-export-util"
 		}
 	],
 	"settings": {}
