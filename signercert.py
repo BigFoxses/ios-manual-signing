@@ -62,8 +62,6 @@ def apksignercert_run_command(cmd, _stdin=None, _stdout=None, _stderr=None):
         message = "Unknown error running %s. Error: %s." % (cmd, error)
         apksignercert_die_with_error(message)
 
-
-
 def  retreive_RSA_file(pattern, folder):
     for root, dirs, files in walk(realpath(folder)):
         for file in files:
@@ -72,9 +70,6 @@ def  retreive_RSA_file(pattern, folder):
     return                 
 
 
-
-
-    exit(return_value)
 
 
 def apksignercert_log(log_str):
@@ -100,6 +95,7 @@ def getSHA(rsa_file):
             if match:
                 groups = match.groups()
                 return groups[0]
+        apksignercert_die_with_error("NO SHA found. COMMAND OUT = %s", output)
 
 
 def main():
