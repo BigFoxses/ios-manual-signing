@@ -10,7 +10,7 @@ function Usage()
 
 if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]  ;then
      Usage
-     exit -1 
+     exit -1
 fi
 MyApp=$1
 # Constants
@@ -25,10 +25,10 @@ CODE_SIGN_IDENTITY_NAME=$2
 OPTIONLIST=$3
 
 # Build (project)
-#xcodebuild -archivePath "$PWD/${BUILD_FILE_NAME}.xcarchive" -project "${PROJECT}.xcodeproj" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean 
+#xcodebuild -archivePath "$PWD/${BUILD_FILE_NAME}.xcarchive" -project "${PROJECT}.xcodeproj" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean
 
 # Build (workspace)
-#xcodebuild -archivePath "${BUILD_FILE_NAME}.xcarchive" -workspace "${WORKSPACE}.xcworkspace" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean 
+#xcodebuild -archivePath "${BUILD_FILE_NAME}.xcarchive" -workspace "${WORKSPACE}.xcworkspace" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean
 
 # Export archive (code sign using export options plist to specify bitcode etc)
 # Newer but not working in Xcode 8 if you use rvm to set non system Ruby (Error Domain=IDEDistributionErrorDomain Code=14 "No applicable devices found.")
@@ -42,9 +42,9 @@ if [ -z $OPTIONLIST ] ; then
     echo "examples: ..."
     exit 1
 else
-  cat $OPTIONLIST | plutil convert xml1 -o $PWD:ExportOptionList.plist - 
-  if [ $? -eq 0 ]; then 
+  cat $OPTIONLIST | plutil convert xml1 -o $PWD:ExportOptionList.plist -
+  if [ $? -eq 0 ]; then
 	xcodebuild -exportArchive -archivePath "${BUILD_FILE_NAME}.xcarchive" -exportPath "${BUILD_FILE_NAME}.ipa"  -exportOptionsPlist $PWD:ExportOptionList.plist
   else
-    echo "fail to generate ExportOptionList.plist" 
+    echo "fail to generate ExportOptionList.plist"
 fi

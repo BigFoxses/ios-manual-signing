@@ -1,11 +1,11 @@
 #!/bin/bash
-if [ $# -lt 2 ]; then 
+if [ $# -lt 2 ]; then
     echo "usage extractProfile <xxx.ipa> <OUTPUT_PROV_DIR>"
     exit -1
 fi
 FILE=$1
-OUTPUT_DIR=$2 
-[[ -d "$OUTPUT_DIR" ]] && rm -rf $OUTPUT_DIR ||  mkdir -p "$OUTPUT_DIR" 
+OUTPUT_DIR=$2
+[[ -d "$OUTPUT_DIR" ]] && rm -rf $OUTPUT_DIR ||  mkdir -p "$OUTPUT_DIR"
 TMP_DIR=$(mktemp -d)
 unzip $FILE -d $TMP_DIR &> /dev/null
 IFS='

@@ -10,4 +10,3 @@ certexpdate=$(/usr/bin/security find-certificate -a -c "${NAME}" -p -Z "/Library
 dateformat=$(/bin/date -j -f "%b %d %T %Y %Z" "$certexpdate" "+%Y-%m-%d %H:%M:%S")
 
 echo "<result>$dateformat</result>"
-

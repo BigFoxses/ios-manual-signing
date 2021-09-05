@@ -3,7 +3,7 @@ echo "THIS SCRIPT IS USED TO DISPLAY ENTITLEMENT OF An IPA"
 if [ "$1" == "" ]; then
     echo "Usage ent2 <xx.ipa>"
     exit -1
-fi 
+fi
 TMP_DIR=$(mktemp -d)
 unzip $1 -d $TMP_DIR &> /dev/null
 IFS='

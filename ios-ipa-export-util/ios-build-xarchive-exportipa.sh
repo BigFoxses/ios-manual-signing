@@ -5,15 +5,15 @@ IFS=$'\n\t'
 
 function Usage()
 {
-  echo " ios-build-xarchive-exportipa <ProjectName> <CodeSigner> <optionlist>  eg. build-ipa-export.sh  "TESTPROJECT" "iPhone Distribution: xxxxx" "OPTIONPLISTFILE" "SCHEME" "
+  echo " ios-build-xarchive-exportipa <ProjectName> <CodeSigner> <optionlist>  eg. build-ipa-export.sh  "TESTPROJECT" "iPhone Distribution: xxxxx" "OPTIONPLISTFILE" "SCHEME" "CONFIGURATION""
 }
 
 if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]  ;then
      Usage
-     exit -1 
+     exit -1
 fi
 
-if ! [ -z $4 ]; then 
+if ! [ -z $4 ]; then
  SCHEME=$1
 fi
 MyApp=$1
@@ -23,16 +23,16 @@ BUILD_FILE_NAME="${MyApp}-${NOW}"
 SCHEME="${MyApp}"
 WORKSPACE="${MyApp}"
 PROJECT="${MyApp}"
-CONFIGURATION="AdHoc"
+CONFIGURATION=$5
 PROFILE_NAME="${MyApp}-AdHoc"
 CODE_SIGN_IDENTITY_NAME=$2
 OPTIONLIST=$3
 
 # Build (project)
-xcodebuild -allowProvisioningUpdates -archivePath "$PWD/${BUILD_FILE_NAME}.xcarchive" -project "${PROJECT}.xcodeproj" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean 
+xcodebuild -allowProvisioningUpdates -archivePath "$PWD/${BUILD_FILE_NAME}.xcarchive" -project "${PROJECT}.xcodeproj" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean
 
 # Build (workspace)
-#xcodebuild --allowProvisioningUpdates -archivePath "${BUILD_FILE_NAME}.xcarchive" -workspace "${WORKSPACE}.xcworkspace" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean 
+#xcodebuild --allowProvisioningUpdates -archivePath "${BUILD_FILE_NAME}.xcarchive" -workspace "${WORKSPACE}.xcworkspace" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" archive clean
 
 # Export archive (code sign using export options plist to specify bitcode etc)
 # Newer but not working in Xcode 8 if you use rvm to set non system Ruby (Error Domain=IDEDistributionErrorDomain Code=14 "No applicable devices found.")

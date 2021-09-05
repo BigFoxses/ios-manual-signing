@@ -50,7 +50,7 @@ IPA_EXECUTABLE=$(echo $IPA_EXECUTABLE | sed  "s@.*/@@g" | sed "s@\.app@@g")
 
 echo "iOS executale Name : $IPA_EXECUTABLE"
 if [  "$ENTILEMENT_FILE" != "" ]; then
-    find $TMP_DIR -name ${IPA_EXECUTABLE} -exec jtool --ent '{}' \; > $PWD/entilements.xml
+    find $TMP_DIR -name ${IPA_EXECUTABLE} -exec jtool2 --ent '{}' \; > $PWD/entilements.xml
 fi
 if [ "$MOBILE_PROVISION_FILE" != "" ]  ; then
     cp ${TMP_DIR}/Payload/${IPA_EXECUTABLE}.app/$DEF_MOBILE_PROVISION_FILE $PWD
